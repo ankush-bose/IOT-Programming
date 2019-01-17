@@ -1,0 +1,59 @@
+#include<ESP8266WiFi.h>
+const char* ssid="Red"; //Type your SSID
+const char* password="12345678";// Type password
+
+WiFiServer server(80);
+
+void setup()
+{
+  Serial.begin(115200);
+  delay(10);
+
+  //Connect to network
+
+  Serial.println();
+  Serial.println();
+  Serial.println("Connecting to  ");
+  Serial.printf(ssid);
+  
+  WiFi.begin(ssid,password);
+
+  while(WiFi.status()!=WL_CONNECTED)
+  {delay(500);
+  Serial.print(".");   }
+
+  Serial.println();
+  Serial.println("Wifi Connected");
+
+
+  //Start the Server
+  server.begin();
+  Serial.println("Server Started ");
+
+  //Print the server ip address
+  Serial.println("use this URl to connect to :");
+  Serial.print("http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+
+}
+
+
+
+
+void loop()
+{
+  //Check if a client has connected 
+  WiFiClient client =server.available();
+
+  if(!client)
+  {return; }
+
+  while (!client.available())
+  {
+    delay(1);
+    }  
+  client.println("<h1>Hello from NodeMU</h1>");
+  
+  
+  }
