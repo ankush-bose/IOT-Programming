@@ -1,0 +1,129 @@
+#include<ESP8266WiFi.h>
+const char* ssid="Red"; //Type your SSID
+const char* password="12345678";// Type password
+
+WiFiServer server(80);
+
+//int ledPin=2;// GPIO of ESP8266
+void setup()
+{
+  Serial.begin(115200);
+  delay(10);
+  pinMode(D0,OUTPUT);
+  digitalWrite(D0,LOW);
+  pinMode(D1,OUTPUT);
+  digitalWrite(D1,LOW);
+  
+  //Connect to network
+
+  Serial.println();
+  Serial.println();
+  Serial.println("Connecting to  ");
+  Serial.printf(ssid);
+  WiFi.begin(ssid,password);
+
+  while(WiFi.status()!=WL_CONNECTED)
+  {delay(500);
+  Serial.print(".");   }
+
+  
+  Serial.println();
+  Serial.println("Wifi Connected");
+
+
+  //Start the Server
+  server.begin();
+  Serial.println("Server Started ");
+
+  //Print the server ip address
+  Serial.println("use this URl to connect to :");
+  Serial.print("http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+
+}
+
+
+
+
+void loop()
+{
+  //Check if a client has connected 
+  WiFiClient client =server.available();
+
+  if(!client)
+  {return; }
+
+
+  Serial.println("New client");
+  while(!client.available())
+  {
+    delay(1);
+    }
+
+  while (!client.available())
+  {
+    delay(1);
+    }  
+  //Read the first line of the request
+  String request=client.readStringUntil('\r');
+  Serial.println(request);  
+  client.flush();
+
+  //MAtch the request
+
+  int value=LOW;
+  if(request.indexOf("/LED=ON")!=-1)
+  {
+    digitalWrite(D0,HIGH);
+    value=HIGH;
+    }
+    if(request.indexOf("/LED=OFF")!=-1)
+      {
+      digitalWrite(D0,LOW);
+      value=LOW;
+      }
+
+  if(request.indexOf("/LED=ON2")!=-1)
+  {
+    digitalWrite(D1,HIGH);
+    value=HIGH;
+    }
+    if(request.indexOf("/LED=OFF2")!=-1)
+      {
+      digitalWrite(D1,LOW);
+      value=LOW;
+      }    
+
+      //Set led according to request
+//Return the response
+client.println("HTTP/1.1 200 OK");// Send a standard http response
+client.println("Content-Type: text/html");
+//client.println("Refresh:5");
+client.println("");//Do not forget this one 
+ client.println("<!DOCTYPE HTML>");
+ client.println("<html>");
+ client.print("LEd pin in now:");
+
+  if(value==HIGH)
+  {
+    client.print("On");
+  }
+  else {
+      client.print("Off");
+  }
+    client.println("<br><br>");
+    client.println("<a href=\" /LED=ON\"\"><button>Turn On</button></a>");
+    client.println("<a href=\" /LED=OFF\"\"><button>Turn Off</button></a>");
+    client.println("<br><br>");
+    client.println("<a href=\" /LED=ON2\"\"><button>Turn On</button></a>");
+    client.println("<a href=\" /LED=OFF2\"\"><button>Turn Off</button></a>");
+    
+    client.println("</html>");
+
+    delay(1);
+    Serial.println("Client Disconnected");
+    Serial.println("");
+    
+}
+  
