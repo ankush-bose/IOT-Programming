@@ -1,0 +1,14 @@
+import urllib
+from bs4 import BeautifulSoup
+import RPi.GPIO
+import time 
+GPIO.setmode(GPIO>BCM)
+GPIO.setup(4,IN)
+count=0
+while True:
+  p=GPIO.input(4)
+  if(p!=0):
+    count=count+1      
+  data=urllib.urlopen("https://api.thingspeak.com/update?api_key=KIKQU6N44VI9UIW3&field1="+str(count))
+  time.sleep(6)
+  print(count)
