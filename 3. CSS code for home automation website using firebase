@@ -1,0 +1,46 @@
+body{
+    text-align: center;
+    background-color: #AAB4DA;
+}
+
+.top
+{
+    background-color: #293E92;
+    opacity: 0.8;
+    font-size: 40px;
+}
+
+.lightStatus1{
+  margin-left: -1000px;
+    margin-top: 10%;
+    color: white;
+    font-family: Algerian;
+}
+
+.lightButton1{
+    font-size: 1.5em;
+    font-family: Verdana;
+    margin-left: -1000px;
+    padding:10px;
+    border-radius: 8px;
+    background-color: #D4DAF2;
+    border: 2px solid #BEC9F7;
+
+}
+.lightStatus2{
+    margin-top: 10%;
+    color: white;
+    margin-top: -100px;
+    font-family: Algerian;
+    margin-left: 1000px;
+}
+
+.lightButton2{
+    font-size: 1.5em;
+    margin-left: 1000px;
+    font-family: Verdana;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #D4DAF2;
+    border: 2px solid #BEC9F7 ;
+}
