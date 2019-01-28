@@ -1,0 +1,17 @@
+  <html>
+
+    <head>
+<div class="top">Home Automation <br><br> <br><br></div>
+
+        <title>PROJECT</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+        <script src="script.js"></script>
+        <link  rel="stylesheet" href="style.css" >
+    </head>
+<h1 class="lightStatus1">Hello 1</h1>
+<button class="lightButton1" >Tap to swtich LED 1</button>
+<h1 class="lightStatus2">Hello 2</h1>
+<button class="lightButton2">Tap to switch LED 2</button>
+</body>
+</html>
