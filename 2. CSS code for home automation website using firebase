@@ -1,0 +1,64 @@
+
+  var config = {
+    apiKey: "AIzaSyAjdZ-009bV5VaqTEU5JBXz-75gf67Pvfw",
+    authDomain: "nodemcu-c6393.firebaseapp.com",
+    databaseURL: "https://nodemcu-c6393.firebaseio.com",
+    projectId: "nodemcu-c6393",
+    storageBucket: "nodemcu-c6393.appspot.com",
+    messagingSenderId: "214214172657"
+  };
+  firebase.initializeApp(config);
+
+
+
+
+  $(document).ready(function(){
+      var database=firebase.database();
+      var ledStatus1;
+      var ledStatus2;
+
+
+       database.ref().on("value",function(snap){
+          ledStatus1=snap.val().ledStatus1;
+          if(ledStatus1 == 1){
+              $(".lightStatus1").text("The Light is On");
+          }
+          else{
+              $(".lightStatus1").text("The Light is OFF")
+          }
+      })
+
+      $(".lightButton1").click(function(){
+        var firebaseRef=firebase.database().ref().child("ledStatus1");
+
+        if(ledStatus1==1){
+            firebaseRef.set(0);
+            ledStatus1=0;
+        } else{
+            firebaseRef.set(1);
+            ledStatus1=1;;
+        }
+    })
+       database.ref().on("value",function(snap){
+          ledStatus2=snap.val().ledStatus2;
+          if(ledStatus2 == 1){
+              $(".lightStatus2").text("The Light is On");
+          }
+          else{
+              $(".lightStatus2").text("The Light is OFF")
+          }
+      })
+
+      $(".lightButton2").click(function(){
+        var firebaseRef=firebase.database().ref().child("ledStatus2");
+
+        if(ledStatus2==1){
+            firebaseRef.set(0);
+            ledStatus2=0;
+        } else{
+            firebaseRef.set(1);
+            ledStatus2=1;;
+        }
+    })
+
+})
