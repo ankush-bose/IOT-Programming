@@ -1,0 +1,15 @@
+go to  website Build.paticle.io
+
+register with your email
+
+open Terminal of Raspberry
+type 
+ 
+ sudo ap-get update
+ sudo ap-get upgrade
+  
+  bash <( curl -sL https://particle.io/install-pi)
+  
+  the terminal will ask for email
+  type your reegistered email 
+  and type your code in the online editor and click on upload to upload it to rapsberry
